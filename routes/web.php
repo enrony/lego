@@ -21,6 +21,7 @@ Route::apiResource('usuarios', 'UsuariosController', ['except'=>'show', 'create'
 
 Route::prefix('usuarios')->group(function () {
     Route::get('/lista', 'UsuariosController@index');
+    Route::get('/countries', 'UsuariosController@countries');
     Route::post('/store', 'UsuariosController@store');
 });
 Route::prefix('categorias')->group(function () {

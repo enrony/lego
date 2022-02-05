@@ -4,6 +4,8 @@ window.Vue = require('vue');
 require('bootstrap');
 require('axios');
 
+const $ = require( "jquery" )( window );
+
 Vue.component('usuarios', require('./components/Usuarios.vue').default);
 Vue.component('usuarios-listado', require('./components/UsuariosListado.vue').default);
 Vue.component('usuarios-agregar', require('./components/UsuariosAgregar.vue').default);

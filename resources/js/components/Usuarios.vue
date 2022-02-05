@@ -62,25 +62,31 @@ export default {
         },
         
     },
-    created: function(){
+    created: async function(){
+        await this.listCategories();
+        await this.listaCountries();
         this.listUsuarios();
-        // this.listBodegas();
     },
     mounted() {
-        console.log('Component mounted.');
         
     },
     methods: {
+        listaCountries: function(){
+             axios.get('/usuarios/countries').then( response => {                
+                this.countries = response.data.countries.data;
+            });
+        },
         listUsuarios: async function(filtros='', page=''){
-            var page2='';
-				if(filtros.page){
-					page2=filtros.page;
-				}
-            await this.listCategories();
+
+            var page2 = '1';
+
+            if(filtros.page){
+                page2=filtros.page;
+            }
+            
             axios.get('/usuarios/lista?page='+page2).then( response => {
                 this.usuarios = response.data.usuarios.data;
                 this.pagination = response.data.pagination;
-                this.countries = response.data.countries.data;
             });
         },    
         listCategories: function(){

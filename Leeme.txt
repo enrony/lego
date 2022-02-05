@@ -1,0 +1,30 @@
+Laravel 7
+
+Descargar el proyecto
+https://github.com/enrony/lego.git
+
+Ejecutar
+	composer install
+	npm install
+	
+Crear base de datos llamada: legops
+	usuario: root
+	sin clave en el .env
+php artisan migrate
+php artisan db:seed
+
+npm run watch
+php artisan serve
+
+en el .env
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=b6ae68162f1f19
+MAIL_PASSWORD=da41221996acad
+MAIL_ENCRYPTION=tls
+
+php artisan event:generate
+
+Para configurar el correo admin
+config('app.administrador')

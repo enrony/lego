@@ -7,7 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <b>Estimado {{ $name }}, </b><br>
-    {{ $body }}
+    {{ $body }}<br><br><br>
+    @foreach( $reporte as $pais)
+        <b>{{$pais->country}}: </b>{{$pais->cantidad}}<br>
+    @endforeach
 </body>
 </html>

@@ -17,14 +17,11 @@ class UsuariosController extends Controller
      */
     public function index(Request $request)
     {
-        //
+        //        
         
-        // dd($result);
         if($request->ajax()){
             
-            $usuarios = Usuarios::ListaUsuarios()->paginate(10);    
-
-            $countries =       file_get_contents('https://api.first.org/data/v1/countries?region=South America&limit=&pretty=true');  
+            $usuarios = Usuarios::ListaUsuarios()->paginate(10);                
 
             return [
                 'pagination'=> [
@@ -36,10 +33,14 @@ class UsuariosController extends Controller
                     'to'            => $usuarios->lastPage(),
                 ],
                 'usuarios' => $usuarios,
-                'countries' => json_decode($countries),
             ];
 
         }
+    }
+
+    public function countries(){
+        $countries =       json_decode(file_get_contents('https://api.first.org/data/v1/countries?region=South America&limit=&pretty=true'));  
+        return compact('countries');
     }
 
     /**
@@ -98,9 +99,9 @@ class UsuariosController extends Controller
             event(new EnviarCorreo($usuarios));
         }
 
-        
+        $mensaje = ['exito' => true];
 
-        return;
+        return compact('mensaje');
     }
 
     /**

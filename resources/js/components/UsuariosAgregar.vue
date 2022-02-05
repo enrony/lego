@@ -8,7 +8,7 @@
             </div>
         </div>
         <form method="POST" v-on:submit.prevent="editUsuario()">
-			<div class="modal fade" id="edit">
+			<div class="modal fade" id="edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -111,7 +111,7 @@ export default {
     },
     watch: {
         dataUsuariosProp: function(){
-            this.dataUsuarios = this.dataUsuariosProp
+            this.dataUsuarios = Object.assign({}, this.dataUsuariosProp)
         }
     },
     computed: {
@@ -126,15 +126,18 @@ export default {
         cerrar: function(){
             this.errors = [];
             this.dataUsuarios = {}
+            this.$parent.dataUsuariosProp = [];
         },
         editUsuario:function(){
             // console.log(this.dataUsuarios)
             axios.post('/usuarios/store', this.dataUsuarios).then(
                 response => {
                     this.errors = [];
-                    this.dataUsuarios = {}
+                    this.dataUsuarios = {};
                     this.$emit('lista');
-                    $(".close").click();                    
+                    this.$parent.dataUsuariosProp = [];
+                    $('#edit').modal('hide')
+                    alert("Registro guardado con éxito.");
                 }
             ).catch(error => {
                 this.errors = error.response.data;
